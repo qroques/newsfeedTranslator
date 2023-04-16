@@ -14,8 +14,6 @@ use Symfony\Component\HttpFoundation\Response;
 class DefaultController extends AbstractController
 {
     public function __construct(
-        private readonly TranslatorInterface $translator,
-        private readonly LivesquawkClient $client,
         private readonly NewsfeedProviderInterface $newsfeedProvider,
         private readonly Newsfeeds $newsfeedsRepository
     )
@@ -35,13 +33,7 @@ class DefaultController extends AbstractController
             $this->newsfeedsRepository->add($newsfeed);
         }
         $this->newsfeedsRepository->flush();
-return new JsonResponse();
-        return new JsonResponse(['text' => $this->translator->trans('<b>FeedForAll </b>helps Restaurant\'s communicate with customers. Let your customers know the latest specials or events.<br>
+        return new JsonResponse();
 
-
-        <br>
-
-
-        newsfeed feed uses include:<br>')]);
     }
 }

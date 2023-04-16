@@ -1,0 +1,22 @@
+---
+on: [push]
+name: Continuous Integration
+jobs:
+  Analyse:
+    runs-on:
+        - self-hosted
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        with:
+          path: .php-cs-fixer.cache
+          key: php-cs-fixer-${{ github.ref }}
+          restore-keys: |
+            php-cs-fixer-
+      - run: cp --no-clobber .env.dist .env
+      - run: docker-compose build php
+      - run: docker-compose run php composer install
+      - name: Phpstan
+        run: docker-compose run --rm php vendor/bin/phpstan
+
