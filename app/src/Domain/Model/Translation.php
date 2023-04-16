@@ -2,7 +2,47 @@
 
 namespace App\Domain\Model;
 
-interface Translation
+use Ramsey\Uuid\Uuid;
+
+class Translation
 {
-    public function __toString(): string;
+    private string $uuid;
+    public function __construct(
+        private readonly string $originalText,
+        private readonly string $originalLocale,
+        private readonly string $translatedText,
+        private readonly string $translatedLocale,
+    ) {
+        $this->uuid = Uuid::uuid4();
+    }
+
+    public function getUuid(): string
+    {
+        return $this->uuid;
+    }
+
+    public function __toString(): string
+    {
+        return $this->translatedText;
+    }
+
+    public function getOriginalText(): string
+    {
+        return $this->originalText;
+    }
+
+    public function getOriginalLocale(): string
+    {
+        return $this->originalLocale;
+    }
+
+    public function getTranslatedText(): string
+    {
+        return $this->translatedText;
+    }
+
+    public function getTranslatedLocale(): string
+    {
+        return $this->translatedLocale;
+    }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Application;
 
-use App\Domain\Model\DeeplTranslation;
+use App\Application\Model\TranslationFactory;
 use App\Domain\Model\Translation;
 use App\Domain\TranslatorInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -35,6 +35,6 @@ class DeeplTranslator implements TranslatorInterface
             ]
         );
 
-        return DeeplTranslation::fromDeeplResponse($this->targetLanguage, $text, $response);
+        return TranslationFactory::fromDeeplResponse($this->targetLanguage, $text, $response);
     }
 }

@@ -1,24 +1,16 @@
 <?php
 
-namespace App\Domain\Model;
+namespace App\Application\Model;
 
+use App\Domain\Model\Translation;
 use InvalidArgumentException;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
-class DeeplTranslation implements Translation
+class TranslationFactory
 {
-    private function __construct(
-        public readonly string $originalText,
-        public readonly string $originalLocale,
-        public readonly string $translatedText,
-        public readonly string $translatedLocale,
-    ) {
-    }
-
-    public static function fromDeeplResponse(string $translatedLocale, string $originalText, ResponseInterface $deeplResponse): self
+    public static function fromDeeplResponse(string $translatedLocale, string $originalText, ResponseInterface $deeplResponse): Translation
     {
         if (200 !== $deeplResponse->getStatusCode()) {
-            dump($deeplResponse->getStatusCode());
             throw new InvalidArgumentException('Cannot build object Translation because response is not valid');
         }
 
@@ -29,7 +21,7 @@ class DeeplTranslation implements Translation
             && array_key_exists(0, $arrayDeeplResponse['translations'])
             && array_key_exists('text', $arrayDeeplResponse['translations'][0])
         ) {
-            return new self(
+            return new Translation(
                 $originalText,
                 $arrayDeeplResponse['translations'][0]['detected_source_language'],
                 $arrayDeeplResponse['translations'][0]['text'],
@@ -38,10 +30,5 @@ class DeeplTranslation implements Translation
         } else {
             throw new InvalidArgumentException('Cannot build object Translation because response is not valid');
         }
-    }
-
-    public function __toString(): string
-    {
-        return $this->translatedText;
     }
 }

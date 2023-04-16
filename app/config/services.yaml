@@ -14,13 +14,17 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Kernel.php'
 
-    App\Application\DeeplTranslator:
+    App\Domain\TranslatorInterface:
+        class: App\Application\DeeplTranslator
         arguments:
             $apiKey: '%deeplApiKey%'
             $targetLanguage: '%deeplTargetLanguage%'
             $domainUrl: '%deeplDomainUrl%'
 
-    App\Controller\DefaultController:
+    App\Application\LivesquawkClient:
         arguments:
-            $rssSourceUrl: '%rssSourceUrl%'
+            $livesquawkUrl: '%livesquawkUrl%'
+            $livesquawkAuthKey: '%livesquawkAuthKey%'
 
+    App\Domain\NewsfeedProviderInterface:
+        class: App\Application\LivesquawkNewsfeedProvider

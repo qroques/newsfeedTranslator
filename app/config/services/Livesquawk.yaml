@@ -3,6 +3,3 @@ services:
         public: false
         autowire: true
         autoconfigure: true
-
-    App\Domain\Repository\Newsfeeds:
-        class: App\Doctrine\Repository\Newsfeeds
