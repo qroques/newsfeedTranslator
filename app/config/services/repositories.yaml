@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    App\Domain\Repository\RssChecksInterface:
-        class: 'App\Doctrine\Repository\RssChecks'
+    App\Domain\Repository\Newsfeeds:
+        class: App\Doctrine\Repository\Newsfeeds

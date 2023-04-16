@@ -2,11 +2,11 @@
 
 namespace App\Application;
 
-use App\Domain\Model\News;
-use App\Domain\NewsProviderInterface;
+use App\Domain\Model\Newsfeed;
+use App\Domain\NewsfeedProviderInterface;
 use App\Domain\TranslatorInterface;
 
-class LivesquawkNewsProvider implements NewsProviderInterface
+class LivesquawkNewsfeedProvider implements NewsfeedProviderInterface
 {
     public function __construct(
         private readonly TranslatorInterface $translator,
@@ -14,14 +14,14 @@ class LivesquawkNewsProvider implements NewsProviderInterface
     ) {
     }
 
-    public function getLatestNews(): array
+    public function getLatestNewsfeeds(?int $maxRecordId = null): array
     {
-        $records = $this->client->getAllFrom()['data'];
-        $newsArray = [];
-
+        $records = $this->client->getAllFrom($maxRecordId)['data'];
+        $newsfeedArray = [];
+dump($records);
         foreach($records as $record) {
             try{
-                $news = new News(
+                $newsfeed = new Newsfeed(
                     $record['ID'],
                     $record['record_id'],
                     (new \DateTimeImmutable())->setTimeStamp($record['date_write']),
@@ -30,13 +30,14 @@ class LivesquawkNewsProvider implements NewsProviderInterface
                     $record['body'] ? $this->translator->trans($record['body']) : null,
                     (bool) $record['alert']
                 );
-
-                $newsArray[] = $news;
+dump($newsfeed);
+                $newsfeedArray[] = $newsfeed;
             } catch(\Throwable $e) {
+                dump($e->getMessage());
                 continue;
             }
         }
 
-        return $newsArray;
+        return $newsfeedArray;
     }
 }

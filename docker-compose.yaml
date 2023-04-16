@@ -26,6 +26,6 @@ services:
   mysql:
     image: mysql:8.0.29
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=rssTranslator
+      - MYSQL_ROOT_PASSWORD=$(MYSQL_ROOT_PASSWORD)
+      - MYSQL_DATABASE=$(MYSQL_DATABASE)
     restart: on-failure

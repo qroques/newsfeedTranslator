@@ -1,6 +1,6 @@
-# RSS Translator
+# News feed Translator
 
-This application can be use to translate RSS feeds with Deepl API
+This application can be use to translate news feeds with Deepl API
 
 ## Requirements
 
@@ -15,7 +15,7 @@ This application can be use to translate RSS feeds with Deepl API
 make install
 ```
 
-2. Update `.env` file variable, especially `DEEPL_API_KEY`, `DEEPL_TARGET_LANGUAGE`, `DEEPL_DOMAIN_URL` and `RSS_FEED_URL` ;
+2. Update `.env` file variable, especially `DEEPL_API_KEY`, `DEEPL_TARGET_LANGUAGE`, `DEEPL_DOMAIN_URL` and `PROVIDER_URL` ;
 
 3. Run command :
 
