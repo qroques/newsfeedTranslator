@@ -14,11 +14,11 @@ class LivesquawkNewsfeedProvider implements NewsfeedProviderInterface
     ) {
     }
 
-    public function getLatestNewsfeeds(?int $maxRecordId = null): array
+    public function getLatestNewsfeeds(?int $maxRecordId = null, ?bool $translate = true): array
     {
         $records = $this->client->getAllFrom($maxRecordId)['data'];
         $newsfeedArray = [];
-dump($records);
+
         foreach($records as $record) {
             try{
                 $newsfeed = new Newsfeed(
@@ -26,14 +26,13 @@ dump($records);
                     $record['record_id'],
                     (new \DateTimeImmutable())->setTimeStamp($record['date_write']),
                     $this->translator->trans($record['title']),
-                    $record['subtitle'] ? $this->translator->trans($record['subtitle']) : null,
-                    $record['body'] ? $this->translator->trans($record['body']) : null,
+                    $record['subtitle'] && $translate ? $this->translator->trans($record['subtitle']) : null,
+                    $record['body'] && $translate ? $this->translator->trans($record['body']) : null,
                     (bool) $record['alert']
                 );
-dump($newsfeed);
+
                 $newsfeedArray[] = $newsfeed;
             } catch(\Throwable $e) {
-                dump($e->getMessage());
                 continue;
             }
         }
