@@ -1,0 +1,4 @@
+SHELL=/bin/bash
+BASH_ENV=/etc/environment
+
+* * * * * root cd /usr/src/app && date > /proc/1/fd/1 2> /proc/1/fd/2

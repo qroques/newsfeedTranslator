@@ -9,5 +9,5 @@ interface NewsfeedProviderInterface
     /**
      * @return array<Newsfeed>
      */
-    public function getLatestNewsfeeds(?int $maxRecordId = null): array;
+    public function getLatestNewsfeeds(?int $maxRecordId = null, ?bool $translate = true): array;
 }
