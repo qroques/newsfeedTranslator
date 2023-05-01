@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\Repository;
+namespace Domain\Repository;
 
-use App\Domain\Model\Newsfeed;
+use Domain\Model\Newsfeed;
 
 interface Newsfeeds
 {
@@ -13,4 +13,9 @@ interface Newsfeeds
     public function flush(): void;
 
     public function findByProviderId(int $providerId): ?Newsfeed;
+
+    /**
+     * @return array<Newsfeed>
+     */
+    public function findAll(PaginationQuery $paginationQuery): array;
 }

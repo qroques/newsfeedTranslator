@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Application;
+namespace Application;
 
-use App\Domain\Model\Newsfeed;
-use App\Domain\NewsfeedProviderInterface;
-use App\Domain\TranslatorInterface;
+use Domain\Model\Newsfeed;
+use Domain\NewsfeedProviderInterface;
+use Domain\TranslatorInterface;
 
 class LivesquawkNewsfeedProvider implements NewsfeedProviderInterface
 {

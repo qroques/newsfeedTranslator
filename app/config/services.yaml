@@ -13,18 +13,27 @@ services:
         exclude:
             - '../src/DependencyInjection/'
             - '../src/Kernel.php'
+            - '../src/Domain/'
+            - '../src/Application/'
+            - '../src/Infrastructure/'
 
-    App\Domain\TranslatorInterface:
-        class: App\Application\DeeplTranslator
+    Application\:
+        resource: "../src/Application/"
+
+    Domain\TranslatorInterface:
+        class: Application\DeeplTranslator
         arguments:
             $apiKey: '%deeplApiKey%'
             $targetLanguage: '%deeplTargetLanguage%'
             $domainUrl: '%deeplDomainUrl%'
 
-    App\Application\LivesquawkClient:
+    Application\LivesquawkClient:
         arguments:
             $livesquawkUrl: '%livesquawkUrl%'
             $livesquawkAuthKey: '%livesquawkAuthKey%'
 
-    App\Domain\NewsfeedProviderInterface:
-        class: App\Application\LivesquawkNewsfeedProvider
+    Domain\NewsfeedProviderInterface:
+        class: Application\LivesquawkNewsfeedProvider
+
+    Domain\Repository\Newsfeeds:
+        alias: Infrastructure\Doctrine\Repository\Newsfeeds

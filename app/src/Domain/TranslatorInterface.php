@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain;
+namespace Domain;
 
-use App\Domain\Model\Translation;
+use Domain\Model\Translation;
 
 interface TranslatorInterface
 {

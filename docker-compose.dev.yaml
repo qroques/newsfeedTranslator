@@ -1,4 +1,5 @@
 version: "3.8"
+
 services:
     nginx:
         image: nginx:1.22.0-alpine
@@ -9,13 +10,31 @@ services:
             - ./app/public:/usr/src/app:ro
         restart: on-failure
 
+    mercure:
+        image: dunglas/mercure
+        restart: unless-stopped
+        ports:
+            - "8081:80"
+        environment:
+            SERVER_NAME: ':80'
+            MERCURE_PUBLISHER_JWT_KEY: '!ChangeThisMercureHubJWTSecretKey!'
+            MERCURE_SUBSCRIBER_JWT_KEY: '!ChangeThisMercureHubJWTSecretKey!'
+            # Set the URL of your Symfony project (without trailing slash!) as value of the cors_origins directive
+            MERCURE_EXTRA_DIRECTIVES: |
+                cors_origins http://localhost
+        # Comment the following line to disable the development mode
+        command: /usr/bin/caddy run --config /etc/caddy/Caddyfile.dev
+        volumes:
+            - mercure_data:/data
+            - mercure_config:/config
+
     php:
         build:
             context: .
             dockerfile: ./docker/php/Dockerfile
         volumes:
             - ./app:/usr/src/app:rw
-            - ./.env:/usr/src/app/.env:ro
+            - ./.env:/usr/src/app/.env:rw
         restart: on-failure
         user: 1000:1000
         env_file:
@@ -55,3 +74,5 @@ services:
 
 volumes:
     mysql_data: ~
+    mercure_data:
+    mercure_config:

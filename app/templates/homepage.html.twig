@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<h1>Newsfeed</h1>
+
+	<p>Last updated:</p>
+    {% for newsfeed in newsfeeds %}
+        <div class="newsfeed">
+            <h2>{{ newsfeed.title.translatedText }}</h2>
+            <p>{{ newsfeed.writtenAt|date('Y-m-d H:i:s') }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block javascripts %}
+
+	{{ parent() }}
+
+	<script>
+		const eventSource = new EventSource("{{ mercure('https://date')|escape('js') }}");
+eventSource.onmessage = event => { // Will be called every time an update is published by the server
+console.log(JSON.parse(event.data));
+}
+	</script>
+
+{% endblock %}

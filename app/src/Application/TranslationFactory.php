@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Application\Model;
+namespace Application;
 
-use App\Domain\Model\Translation;
+use Domain\Model\Translation;
 use InvalidArgumentException;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 

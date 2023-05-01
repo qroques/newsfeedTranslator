@@ -1,5 +1,9 @@
+homepage:
+    path: /
+    controller: Application\Controller\HomepageController
+    methods: GET
 
-api_post_edit:
-    path:       /test
-    controller: App\Controller\DefaultController
-    methods:    GET
+publish_mercure:
+    path: /publish
+    controller: Application\Controller\PublishController
+    methods: GET

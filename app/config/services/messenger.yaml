@@ -1,0 +1,12 @@
+---
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Infrastructure\Symfony\Messenger\CommandBus:
+        $messageBus: "@command.bus"
+
+    Application\Bus\CommandBus:
+        alias: Infrastructure\Symfony\Messenger\CommandBus

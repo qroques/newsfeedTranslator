@@ -1,4 +1,0 @@
-api_post_edit:
-    path:       /api/posts/{id}
-    controller: App\Controller\BlogApiController::edit
-    methods:    PUT

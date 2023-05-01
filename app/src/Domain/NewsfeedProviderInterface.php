@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain;
+namespace Domain;
 
-use App\Domain\Model\Newsfeed;
+use Domain\Model\Newsfeed;
 
 interface NewsfeedProviderInterface
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Application;
+namespace Application;
 
-use App\Application\Model\TranslationFactory;
-use App\Domain\Model\Translation;
-use App\Domain\TranslatorInterface;
+use Application\TranslationFactory;
+use Domain\Model\Translation;
+use Domain\TranslatorInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class DeeplTranslator implements TranslatorInterface

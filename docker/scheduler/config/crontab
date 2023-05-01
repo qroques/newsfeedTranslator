@@ -1,4 +1,4 @@
 SHELL=/bin/bash
 BASH_ENV=/etc/environment
 
-* * * * * root cd /usr/src/app && date > /proc/1/fd/1 2> /proc/1/fd/2
+* * * * * root cd /usr/src/app && bin/console app:retrieve-news-feed > /proc/1/fd/1 2> /proc/1/fd/2

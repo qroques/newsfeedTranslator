@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Doctrine\Repository;
+namespace Infrastructure\Doctrine\Repository;
 
-use App\Domain\Model\Newsfeed;
-use App\Domain\Repository\Newsfeeds as NewsfeedsInterface;
+use Domain\Model\Newsfeed;
+use Domain\Repository\Newsfeeds as NewsfeedsInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Domain\Repository\PaginationQuery;
 
 class Newsfeeds implements NewsfeedsInterface
 {
@@ -41,5 +42,15 @@ class Newsfeeds implements NewsfeedsInterface
     public function findByProviderId(int $providerId): ?Newsfeed
     {
         return $this->innerRepository->findOneBy(['providerId' => $providerId]);
+    }
+
+    public function findAll(PaginationQuery $paginationQuery): array
+    {
+        return $this->innerRepository->findBy(
+            [],
+            ['writtenAt' => 'DESC'],
+            $paginationQuery->getLimit(),
+            $paginationQuery->getOffset()
+        );
     }
 }

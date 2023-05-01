@@ -4,5 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    App\Domain\Repository\Newsfeeds:
-        class: App\Doctrine\Repository\Newsfeeds
+    Infrastructure\Doctrine\Repository\:
+        resource: "../../src/Infrastructure/Doctrine/Repository/*"
+
+    Domain\Repository\Newsfeeds:
+        class: Infrastructure\Doctrine\Repository\Newsfeeds

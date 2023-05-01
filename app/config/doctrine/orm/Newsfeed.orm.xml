@@ -5,7 +5,7 @@
     xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
 >
 
-    <entity name="App\Domain\Model\Newsfeed">
+    <entity name="Domain\Model\Newsfeed">
         <id name="uuid" type="string" unique="true" />
 
         <field name="createdAt" type="datetime_immutable" />
@@ -14,15 +14,15 @@
         <field name="writtenAt" type="datetime_immutable" />
         <field name="alert" type="boolean" />
 
-        <one-to-one field="title" target-entity="App\Domain\Model\Translation">
+        <one-to-one field="title" target-entity="Domain\Model\Translation">
             <cascade><cascade-all /></cascade>
             <join-column name="title_translation_id" referenced-column-name="uuid" />
         </one-to-one>
-        <one-to-one field="subtitle" target-entity="App\Domain\Model\Translation">
+        <one-to-one field="subtitle" target-entity="Domain\Model\Translation">
             <cascade><cascade-all /></cascade>
             <join-column name="subtitle_translation_id" referenced-column-name="uuid" />
         </one-to-one>
-        <one-to-one field="body" target-entity="App\Domain\Model\Translation">
+        <one-to-one field="body" target-entity="Domain\Model\Translation">
             <cascade><cascade-all /></cascade>
             <join-column name="body_translation_id" referenced-column-name="uuid" />
         </one-to-one>
